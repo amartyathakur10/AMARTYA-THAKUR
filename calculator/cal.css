@@ -1,0 +1,51 @@
+.all
+{
+font-size: 32;
+text-align:center;
+}
+
+button
+{
+    color:black;
+    background-color:teal;
+    font-size: 32;
+    height: 100px;
+    width: 200px;
+}
+
+.resultcss
+{
+    background-color: aliceblue;
+    color:darkred;
+    height: 100px;
+    width: 410px;
+    font-size: 32;
+    border: darkslateblue solid 3px;
+    text-align: center;
+}
+
+input
+{
+    background-color: whitesmoke;
+    color:black;
+    height: 100px;
+    width: 200px;
+    font-size: 32;
+}
+
+.btnLarge
+{
+width: 410px;
+}
+
+h1
+{
+text-align: center;
+font-family: Arial, Helvetica, sans-serif;
+font-weight: bold;
+font-size: 55;
+}
+
+footer{
+    font-size: 13px;
+}
