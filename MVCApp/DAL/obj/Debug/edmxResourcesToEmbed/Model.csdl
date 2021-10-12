@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DAL" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="AppDbContext" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CartItems" EntityType="DAL.CartItem" />
+    <EntitySet Name="Carts" EntityType="DAL.Cart" />
+    <EntitySet Name="Categories" EntityType="DAL.Category" />
+    <EntitySet Name="Products" EntityType="DAL.Product" />
+    <EntitySet Name="Roles" EntityType="DAL.Role" />
+    <EntitySet Name="Users" EntityType="DAL.User" />
+    <AssociationSet Name="FK_dbo_CartItems_dbo_Carts_CartId" Association="DAL.FK_dbo_CartItems_dbo_Carts_CartId">
+      <End Role="Cart" EntitySet="Carts" />
+      <End Role="CartItem" EntitySet="CartItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Carts_dbo_Users_UserId" Association="DAL.FK_dbo_Carts_dbo_Users_UserId">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Cart" EntitySet="Carts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Products_dbo_Categories_CategoryId" Association="DAL.FK_dbo_Products_dbo_Categories_CategoryId">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="UserRoles" Association="DAL.UserRoles">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="CartItem">
+    <Key>
+      <PropertyRef Name="CartItemId" />
+    </Key>
+    <Property Name="CartItemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductId" Type="Int32" Nullable="false" />
+    <Property Name="UnitPrice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <Property Name="Total" Type="Int32" Nullable="false" />
+    <Property Name="CartId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Cart" Relationship="DAL.FK_dbo_CartItems_dbo_Carts_CartId" FromRole="CartItem" ToRole="Cart" />
+  </EntityType>
+  <EntityType Name="Cart">
+    <Key>
+      <PropertyRef Name="CartId" />
+    </Key>
+    <Property Name="CartId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Total" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="CartItems" Relationship="DAL.FK_dbo_CartItems_dbo_Carts_CartId" FromRole="Cart" ToRole="CartItem" />
+    <NavigationProperty Name="User" Relationship="DAL.FK_dbo_Carts_dbo_Users_UserId" FromRole="Cart" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="CategoryId" />
+    </Key>
+    <Property Name="CategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Products" Relationship="DAL.FK_dbo_Products_dbo_Categories_CategoryId" FromRole="Category" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UnitPrice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="CategoryId" Type="Int32" Nullable="false" />
+    <Property Name="ImageName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Category" Relationship="DAL.FK_dbo_Products_dbo_Categories_CategoryId" FromRole="Product" ToRole="Category" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Users" Relationship="DAL.UserRoles" FromRole="Role" ToRole="User" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Username" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Contact" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Carts" Relationship="DAL.FK_dbo_Carts_dbo_Users_UserId" FromRole="User" ToRole="Cart" />
+    <NavigationProperty Name="Roles" Relationship="DAL.UserRoles" FromRole="User" ToRole="Role" />
+  </EntityType>
+  <Association Name="FK_dbo_CartItems_dbo_Carts_CartId">
+    <End Type="DAL.Cart" Role="Cart" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="DAL.CartItem" Role="CartItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cart">
+        <PropertyRef Name="CartId" />
+      </Principal>
+      <Dependent Role="CartItem">
+        <PropertyRef Name="CartId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Carts_dbo_Users_UserId">
+    <End Type="DAL.User" Role="User" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="DAL.Cart" Role="Cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Cart">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Products_dbo_Categories_CategoryId">
+    <End Type="DAL.Category" Role="Category" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="DAL.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryId" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserRoles">
+    <End Type="DAL.Role" Role="Role" Multiplicity="*" />
+    <End Type="DAL.User" Role="User" Multiplicity="*" />
+  </Association>
+</Schema>

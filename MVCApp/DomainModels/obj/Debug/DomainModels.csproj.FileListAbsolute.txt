@@ -1,0 +1,11 @@
+D:\Code\Tarento\MVCApp\DomainModels\bin\Debug\DomainModels.dll
+D:\Code\Tarento\MVCApp\DomainModels\bin\Debug\DomainModels.pdb
+D:\Code\Tarento\MVCApp\DomainModels\obj\Debug\DomainModels.csproj.AssemblyReference.cache
+D:\Code\Tarento\MVCApp\DomainModels\obj\Debug\DomainModels.csproj.CoreCompileInputs.cache
+D:\Code\Tarento\MVCApp\DomainModels\obj\Debug\DomainModels.dll
+D:\Code\Tarento\MVCApp\DomainModels\obj\Debug\DomainModels.pdb
+C:\Users\test\Documents\projectsir\MVCApp\DomainModels\bin\Debug\DomainModels.dll
+C:\Users\test\Documents\projectsir\MVCApp\DomainModels\bin\Debug\DomainModels.pdb
+C:\Users\test\Documents\projectsir\MVCApp\DomainModels\obj\Debug\DomainModels.csproj.CoreCompileInputs.cache
+C:\Users\test\Documents\projectsir\MVCApp\DomainModels\obj\Debug\DomainModels.dll
+C:\Users\test\Documents\projectsir\MVCApp\DomainModels\obj\Debug\DomainModels.pdb
